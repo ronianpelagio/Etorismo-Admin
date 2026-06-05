@@ -1,12 +1,11 @@
 {
+  "version": 2,
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist/client" }
-    }
+    { "src": "dist/server/server.js", "use": "@vercel/node" },
+    { "src": "dist/client/**", "use": "@vercel/static" }
   ],
-  "rewrites": [
-    { "source": "^/(.*)$", "destination": "/index.tsx" }
+  "routes": [
+    { "src": "/assets/(.*)", "dest": "dist/client/assets/$1" },
+    { "src": "/(.*)", "dest": "dist/server/server.js" }
   ]
 }
